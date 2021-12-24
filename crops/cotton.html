@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Crop Doctor</title>
+    <link rel="stylesheet" href="D:\SEM-6\Crop Doctor\crops\css\cotton.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- <script src="https://kit.fontawesome.com/a076d05399.js"></script> -->
+  </head>
+  <body>
+  
+  <header>
+		<h1> Cotton </h1>
+	</header>
+	
+	<main>
+		<aside class = "left">
+		</aside>
+	
+		<section class = "middle">
+		
+		<p class = "b2"> Cotton is a Kharif crop in the major parts of the country viz. Punjab, Haryana, Rajasthan, Uttar Pradesh, Madhya Pradesh, Gujarat, Maharashtra and parts of Andhra Pradesh & Karnataka. <br> <br> In these areas, the irrigated crop is sown from March-May and the rain fed crop in June-July with the commencement of the monsoon. </p>
+		<br>
+		<br>
+		<br>
+		
+		</section>
+		
+		<aside class = "right">	
+		</aside>
+		
+	</main>
+	<br>
+	<br>
+  
+    <div class="container" style = "margin-left: 500px">
+      <div class="wrapper">
+        <div class="image">
+          <img src="" alt="">
+        </div>
+        <div class="content">
+          <i class="fa fa-cloud-upload fa-5x"></i>
+          <div class="text">No image chosen, yet!</div>
+        </div>
+          <div id="cancel-btn"><i class="fa fa-times-circle"></i></div>
+          <div class="file-name">Image name here</div>
+      </div>
+      <button onclick="defaultBtnActive()" id="custom-btn">Choose an image</button>
+      <input id="default-btn" type="file" hidden> 
+	  <button id="custom-btn">Detect</button>
+    </div>
+
+    <script>
+      const wrapper = document.querySelector(".wrapper");
+      const fileName = document.querySelector(".file-name");
+      const defaultBtn = document.querySelector("#default-btn");
+      const customBtn = document.querySelector("#custom-btn");
+      const cancelBtn = document.querySelector("#cancel-btn i");
+      const img = document.querySelector("img");
+      let regExp = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ ]+$/;
+      function defaultBtnActive(){
+        defaultBtn.click();
+      }
+      defaultBtn.addEventListener("change", function(){
+        const file = this.files[0];
+        if(file){
+          const reader = new FileReader();
+          reader.onload = function(){
+            const result = reader.result;
+            img.src = result;
+            wrapper.classList.add("active");
+          }
+          cancelBtn.addEventListener("click", function(){
+            img.src = "";
+            wrapper.classList.remove("active");
+          })
+          reader.readAsDataURL(file);
+        }
+        if(this.value){
+          let valueStore = this.value.match(regExp);
+          fileName.textContent = valueStore;
+        }
+      });
+    </script>
+
+  </body>
+</html>
